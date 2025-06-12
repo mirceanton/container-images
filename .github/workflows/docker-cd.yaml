@@ -67,5 +67,5 @@ jobs:
           files: ./docker-bake.hcl
           targets: default
           source: .
-          set: |
-            *.args.GIT_SHA=${{ github.sha }}
+        env:
+          GIT_SHA: ${{ github.sha }}
