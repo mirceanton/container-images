@@ -1,0 +1,58 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Hadolint
+permissions: { contents: read }
+
+on:
+  push:
+    paths:
+      - "containers/**/Dockerfile"
+      - ".mise.toml"
+      - ".github/workflows/hadolint.yaml"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Dry Run
+        required: false
+        default: false
+        type: boolean
+      select:
+        description: "Select container to build"
+        required: false
+        default: ""
+        type: string
+
+jobs:
+  discover-containers:
+    runs-on: ubuntu-latest
+    outputs:
+      containers: ${{ steps.discover.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Find Containers
+        id: discover
+        uses: mirceanton/action-folder-matrix@da40b4ba972833ee6765ba491dbdc6c5c0848c77 # v2.0.0
+        with:
+          path: ./containers
+          changed-only: ${{ github.event_name != 'workflow_dispatch' }}
+          filter: ${{ inputs.select }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  hadolint:
+    needs: discover-containers
+    runs-on: ubuntu-latest
+    if: fromJson(needs.discover-containers.outputs.containers).directory[0] != null
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.discover-containers.outputs.containers) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup mise
+        uses: jdx/mise-action@13abe502c30c1559a5c37dff303831bab82c9402 # v2.2.3
+
+      - name: Run hadolint
+        run: mise exec -- hadolint containers/${{ matrix.directory }}/Dockerfile
