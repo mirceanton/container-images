@@ -11,11 +11,6 @@ on:
       - ".github/workflows/hadolint.yaml"
   workflow_dispatch:
     inputs:
-      dry-run:
-        description: Dry Run
-        required: false
-        default: false
-        type: boolean
       select:
         description: "Select container to build"
         required: false
