@@ -38,7 +38,7 @@ jobs:
   hadolint:
     needs: discover-containers
     runs-on: ubuntu-latest
-    if: fromJson(needs.discover-containers.outputs.containers).directory != null && fromJson(needs.discover-containers.outputs.containers).directory | length > 0
+    if: fromJson(needs.discover-containers.outputs.containers).directory[0] != null
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.discover-containers.outputs.containers) }}
