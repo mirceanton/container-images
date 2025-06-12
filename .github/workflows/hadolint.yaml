@@ -31,7 +31,7 @@ jobs:
         uses: mirceanton/action-folder-matrix@da40b4ba972833ee6765ba491dbdc6c5c0848c77 # v2.0.0
         with:
           path: ./containers
-          changed-only: ${{ github.event_name != 'workflow_dispatch' }}
+          # changed-only: ${{ github.event_name != 'workflow_dispatch' }}
           filter: ${{ inputs.select }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
