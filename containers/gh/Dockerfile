@@ -21,4 +21,5 @@ RUN apk add --no-cache curl tar && \
 FROM alpine:3.22
 RUN apk add --no-cache git openssh-client
 COPY --from=downloader /usr/local/bin/gh /usr/local/bin/gh
-ENTRYPOINT ["gh"]
+ENTRYPOINT ["/bin/bash"]
+CMD ["-c", "gh --version"]

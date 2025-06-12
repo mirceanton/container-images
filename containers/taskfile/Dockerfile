@@ -22,4 +22,5 @@ FROM alpine:3.22
 RUN apk add --no-cache bash git
 COPY --from=downloader /usr/local/bin/task /usr/local/bin/task
 WORKDIR /workspace
-ENTRYPOINT ["task"]
+ENTRYPOINT ["/bin/bash"]
+CMD ["-c", "task --version"]
