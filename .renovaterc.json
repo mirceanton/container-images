@@ -1,4 +1,16 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [ "github>mirceanton/renovate-config//default.json5" ]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>mirceanton/renovate-config//default.json5"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Process Annotations in Docker Bake",
+      "managerFilePatterns": ["/(^|/)docker-bake\\.hcl$/"],
+      "matchStrings": [
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n.+ = \"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ]
 }
