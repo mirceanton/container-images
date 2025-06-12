@@ -1,0 +1,73 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Trivy
+
+permissions:
+  security-events: write
+  contents: read
+
+on:
+  schedule: [{cron: "1 0 * * *"}]
+  pull_request: { branches: [main] }
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Dry Run
+        required: false
+        default: false
+        type: boolean
+      select:
+        description: "Select container to build"
+        required: false
+        default: ""
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  discover-containers:
+    runs-on: ubuntu-latest
+    outputs:
+      containers: ${{ steps.discover.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Find Containers
+        id: discover
+        uses: mirceanton/action-folder-matrix@da40b4ba972833ee6765ba491dbdc6c5c0848c77 # v2.0.0
+        with:
+          path: ./containers
+          changed-only: ${{ github.event_name != 'workflow_dispatch' }}
+          filter: ${{ inputs.select }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  scan:
+    needs: discover-containers
+    runs-on: ubuntu-latest
+    if: fromJson(needs.discover-containers.outputs.containers).directory[0] != null
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.discover-containers.outputs.containers) }}
+    steps:
+      - name: Create directory for scan results
+        run: mkdir -p trivy-results
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@76071ef0d7ec797419534a183b498b4d6366cf37 # 0.31.0
+        with:
+          image-ref: ghcr.io/mirceanton/${{ matrix.directory }}:latest
+          format: 'sarif'
+          output: 'trivy-results/results.sarif'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          ignore-unfixed: false
+          vuln-type: 'os,library'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        if: ${{ !(inputs.dry-run || github.event_name == 'pull_request') }}
+        uses: github/codeql-action/upload-sarif@fca7ace96b7d713c7035871441bd52efbe39e27e # v3.28.19
+        with:
+          sarif_file: 'trivy-results/results.sarif'
+          category: 'trivy'
