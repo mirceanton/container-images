@@ -2,7 +2,7 @@ DATE = formatdate( "YYYY.MM.DD", timestamp() )
 variable "GIT_SHA" {}
 variable "VERSION" {
     # renovate: datasource=github-tags depName=cli/cli
-    default = "2.75.1"
+    default = "2.76.0"
 }
 
 target "default" {
