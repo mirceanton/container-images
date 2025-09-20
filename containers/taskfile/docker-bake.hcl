@@ -2,7 +2,7 @@ DATE = formatdate( "YYYY.MM.DD", timestamp() )
 variable "GIT_SHA" {}
 variable "VERSION" {
     # renovate: datasource=github-tags depName=go-task/task
-    default = "3.45.3"
+    default = "3.45.4"
 }
 
 target "default" {
