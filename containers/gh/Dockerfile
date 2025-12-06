@@ -3,7 +3,7 @@
 # ===============================================================================
 # Builder stage
 # ===============================================================================
-FROM alpine:3.22 AS downloader
+FROM alpine:3.23 AS downloader
 ARG GH_VERSION
 ARG TARGETARCH
 
@@ -18,7 +18,7 @@ RUN apk add --no-cache curl tar && \
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM alpine:3.22
+FROM alpine:3.23
 RUN apk add --no-cache git openssh-client
 COPY --from=downloader /usr/local/bin/gh /usr/local/bin/gh
 ENTRYPOINT ["/bin/bash"]
