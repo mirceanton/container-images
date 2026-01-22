@@ -1,5 +1,5 @@
 ---
-name: Docker Build and Push
+name: Release
 permissions: { contents: read }
 
 on:
