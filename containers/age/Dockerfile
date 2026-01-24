@@ -3,7 +3,7 @@
 # ===============================================================================
 # Builder stage
 # ===============================================================================
-FROM alpine:3.22 AS downloader
+FROM alpine:3.23 AS downloader
 ARG AGE_VERSION
 ARG TARGETARCH
 
@@ -18,7 +18,7 @@ RUN apk add --no-cache curl tar && \
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM alpine:3.22
+FROM alpine:3.23
 RUN apk add --no-cache bash git
 COPY --from=downloader /usr/local/bin/age /usr/local/bin/age
 COPY --from=downloader /usr/local/bin/age-keygen /usr/local/bin/age-keygen
