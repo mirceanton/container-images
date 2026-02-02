@@ -5,7 +5,6 @@ name: Trivy
 permissions:
   security-events: write
   contents: read
-  packages: read
 
 on:
   schedule: [{cron: "1 0 * * *"}]
@@ -31,7 +30,7 @@ jobs:
   discover-containers:
     runs-on: ubuntu-latest
     outputs:
-      containers: ${{ steps.discover.outputs.matrix }}
+      matrix: ${{ steps.flatten.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -43,93 +42,24 @@ jobs:
           path: ./containers
           changed-only: ${{ github.event_name == 'pull_request' }}
           filter: ${{ inputs.select }}
+          metadata-file: trivy.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-  discover-tags:
-    needs: discover-containers
-    runs-on: ubuntu-latest
-    if: fromJson(needs.discover-containers.outputs.containers).directory[0] != null
-    outputs:
-      matrix: ${{ steps.build-matrix.outputs.matrix }}
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.discover-containers.outputs.containers) }}
-    steps:
-      - name: Fetch all tags for ${{ matrix.directory }}
-        id: get-tags
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Flatten matrix to image:tag pairs
+        id: flatten
         run: |
-          # Fetch all tags from GHCR for this image
-          TAGS=$(gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "/users/mirceanton/packages/container/${{ matrix.directory }}/versions" \
-            --paginate \
-            --jq '.[].metadata.container.tags[]' 2>/dev/null | sort -u || echo "latest")
-          
-          # If no tags found, default to latest
-          if [ -z "$TAGS" ]; then
-            TAGS="latest"
-          fi
-          
-          # Convert to JSON array
-          TAGS_JSON=$(echo "$TAGS" | jq -R -s -c 'split("\n") | map(select(length > 0))')
-          echo "tags=$TAGS_JSON" >> "$GITHUB_OUTPUT"
-          echo "Found tags: $TAGS_JSON"
-
-      - name: Build matrix entry
-        id: build-matrix
-        run: |
-          # Create matrix entries for each tag
-          MATRIX=$(echo '${{ steps.get-tags.outputs.tags }}' | jq -c '{include: [.[] | {directory: "${{ matrix.directory }}", tag: .}]}')
+          MATRIX=$(echo '${{ steps.discover.outputs.matrix }}' | jq -c '
+            {include: [.include[] | {directory, tag: (.tags // ["latest"])[]} ]}
+          ')
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
-
-  aggregate-matrix:
-    needs: [discover-containers, discover-tags]
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.aggregate.outputs.matrix }}
-    steps:
-      - name: Aggregate all image:tag combinations
-        id: aggregate
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          DIRECTORIES='${{ needs.discover-containers.outputs.containers }}'
-          INCLUDE_ARRAY="[]"
-          
-          # Parse directories from the containers output
-          for DIR in $(echo "$DIRECTORIES" | jq -r '.directory[]'); do
-            # Fetch tags for each directory
-            TAGS=$(gh api \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-              "/users/mirceanton/packages/container/${DIR}/versions" \
-              --paginate \
-              --jq '.[].metadata.container.tags[]' 2>/dev/null | sort -u || echo "latest")
-            
-            if [ -z "$TAGS" ]; then
-              TAGS="latest"
-            fi
-            
-            # Add each directory:tag combination to the include array
-            for TAG in $TAGS; do
-              INCLUDE_ARRAY=$(echo "$INCLUDE_ARRAY" | jq -c --arg dir "$DIR" --arg tag "$TAG" '. + [{directory: $dir, tag: $tag}]')
-            done
-          done
-          
-          MATRIX=$(echo "$INCLUDE_ARRAY" | jq -c '{include: .}')
-          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
-          echo "Final matrix: $MATRIX"
 
   scan:
-    needs: aggregate-matrix
+    needs: discover-containers
     runs-on: ubuntu-latest
-    if: fromJson(needs.aggregate-matrix.outputs.matrix).include[0] != null
+    if: fromJson(needs.discover-containers.outputs.matrix).include[0] != null
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.aggregate-matrix.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.discover-containers.outputs.matrix) }}
     steps:
       - name: Create directory for scan results
         run: mkdir -p trivy-results
