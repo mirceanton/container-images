@@ -14,3 +14,17 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8 # v3.6.1
       - run: mise exec -- actionlint
+
+  dockerfile-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run Trivy for Dockerfile misconfigurations
+        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # 0.33.1
+        with:
+          scan-type: 'config'
+          scan-ref: './containers'
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH,MEDIUM'
