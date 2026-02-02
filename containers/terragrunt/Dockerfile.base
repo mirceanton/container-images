@@ -1,0 +1,20 @@
+# syntax=docker/dockerfile:1
+
+# ===============================================================================
+# Builder stage
+# ===============================================================================
+FROM alpine:3.23 AS downloader
+ARG TERRAGRUNT_VERSION
+ARG TARGETARCH
+
+RUN echo "Downloading terragrunt version ${TERRAGRUNT_VERSION} for architecture ${TARGETARCH}"
+RUN apk add --no-cache curl && \
+    curl -fsSL "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TARGETARCH}" \
+    -o /terragrunt && \
+    chmod +x /terragrunt
+
+# ===============================================================================
+# Final image (binary-only, for use in multi-stage builds)
+# ===============================================================================
+FROM scratch
+COPY --from=downloader /terragrunt /terragrunt

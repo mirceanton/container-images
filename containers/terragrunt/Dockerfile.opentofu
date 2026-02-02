@@ -1,0 +1,31 @@
+# syntax=docker/dockerfile:1
+
+# ===============================================================================
+# Builder stage
+# ===============================================================================
+FROM alpine:3.23 AS downloader
+ARG TERRAGRUNT_VERSION
+ARG OPENTOFU_VERSION
+ARG TARGETARCH
+
+RUN apk add --no-cache curl tar
+
+RUN echo "Downloading terragrunt version ${TERRAGRUNT_VERSION} for architecture ${TARGETARCH}" && \
+    curl -fsSL "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TARGETARCH}" \
+    -o /usr/local/bin/terragrunt && \
+    chmod +x /usr/local/bin/terragrunt
+
+RUN echo "Downloading opentofu version ${OPENTOFU_VERSION} for architecture ${TARGETARCH}" && \
+    curl -fsSL "https://github.com/opentofu/opentofu/releases/download/v${OPENTOFU_VERSION}/tofu_${OPENTOFU_VERSION}_linux_${TARGETARCH}.tar.gz" | \
+    tar -xz -C /usr/local/bin tofu && \
+    chmod +x /usr/local/bin/tofu
+
+# ===============================================================================
+# Final image
+# ===============================================================================
+FROM alpine:3.23
+RUN apk add --no-cache bash git
+COPY --from=downloader /usr/local/bin/terragrunt /usr/local/bin/terragrunt
+COPY --from=downloader /usr/local/bin/tofu /usr/local/bin/tofu
+ENTRYPOINT ["/bin/sh"]
+CMD ["-c", "terragrunt --version && tofu --version"]

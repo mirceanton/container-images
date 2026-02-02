@@ -1,0 +1,32 @@
+# syntax=docker/dockerfile:1
+
+# ===============================================================================
+# Builder stage
+# ===============================================================================
+FROM alpine:3.23 AS downloader
+ARG TERRAGRUNT_VERSION
+ARG TERRAFORM_VERSION
+ARG TARGETARCH
+
+RUN apk add --no-cache curl unzip
+
+RUN echo "Downloading terragrunt version ${TERRAGRUNT_VERSION} for architecture ${TARGETARCH}" && \
+    curl -fsSL "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TARGETARCH}" \
+    -o /usr/local/bin/terragrunt && \
+    chmod +x /usr/local/bin/terragrunt
+
+RUN echo "Downloading terraform version ${TERRAFORM_VERSION} for architecture ${TARGETARCH}" && \
+    curl -fsSL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${TARGETARCH}.zip" \
+    -o /tmp/terraform.zip && \
+    unzip /tmp/terraform.zip -d /usr/local/bin && \
+    chmod +x /usr/local/bin/terraform
+
+# ===============================================================================
+# Final image
+# ===============================================================================
+FROM alpine:3.23
+RUN apk add --no-cache bash git
+COPY --from=downloader /usr/local/bin/terragrunt /usr/local/bin/terragrunt
+COPY --from=downloader /usr/local/bin/terraform /usr/local/bin/terraform
+ENTRYPOINT ["/bin/sh"]
+CMD ["-c", "terragrunt --version && terraform --version"]
