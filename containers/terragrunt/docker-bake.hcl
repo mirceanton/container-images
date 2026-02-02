@@ -74,9 +74,19 @@ target "terraform" {
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:terraform-${regex("^([0-9]+\\.[0-9]+)", TERRAFORM_VERSION)[0]}" : "",
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:terraform-${regex("^([0-9]+)", TERRAFORM_VERSION)[0]}" : "",
 
-        # Combined version tags (terragrunt-terraform)
+        # Combined version tags: TG X.Y.Z with TF X.Y.Z / X.Y / X
         "ghcr.io/mirceanton/terragrunt:${TERRAGRUNT_VERSION}-terraform-${TERRAFORM_VERSION}",
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${TERRAGRUNT_VERSION}-terraform-${regex("^([0-9]+\\.[0-9]+)", TERRAFORM_VERSION)[0]}" : "",
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${TERRAGRUNT_VERSION}-terraform-${regex("^([0-9]+)", TERRAFORM_VERSION)[0]}" : "",
+
+        # Combined version tags: TG X.Y with TF X.Y.Z / X.Y / X
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+\\.[0-9]+)", TERRAGRUNT_VERSION)[0]}-terraform-${TERRAFORM_VERSION}" : "",
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+\\.[0-9]+)", TERRAGRUNT_VERSION)[0]}-terraform-${regex("^([0-9]+\\.[0-9]+)", TERRAFORM_VERSION)[0]}" : "",
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+\\.[0-9]+)", TERRAGRUNT_VERSION)[0]}-terraform-${regex("^([0-9]+)", TERRAFORM_VERSION)[0]}" : "",
+
+        # Combined version tags: TG X with TF X.Y.Z / X.Y / X
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-terraform-${TERRAFORM_VERSION}" : "",
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-terraform-${regex("^([0-9]+\\.[0-9]+)", TERRAFORM_VERSION)[0]}" : "",
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-terraform-${regex("^([0-9]+)", TERRAFORM_VERSION)[0]}" : ""
     ]
 
@@ -118,9 +128,19 @@ target "opentofu" {
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:opentofu-${regex("^([0-9]+\\.[0-9]+)", OPENTOFU_VERSION)[0]}" : "",
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:opentofu-${regex("^([0-9]+)", OPENTOFU_VERSION)[0]}" : "",
 
-        # Combined version tags (terragrunt-opentofu)
+        # Combined version tags: TG X.Y.Z with OT X.Y.Z / X.Y / X
         "ghcr.io/mirceanton/terragrunt:${TERRAGRUNT_VERSION}-opentofu-${OPENTOFU_VERSION}",
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${TERRAGRUNT_VERSION}-opentofu-${regex("^([0-9]+\\.[0-9]+)", OPENTOFU_VERSION)[0]}" : "",
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${TERRAGRUNT_VERSION}-opentofu-${regex("^([0-9]+)", OPENTOFU_VERSION)[0]}" : "",
+
+        # Combined version tags: TG X.Y with OT X.Y.Z / X.Y / X
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+\\.[0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${OPENTOFU_VERSION}" : "",
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+\\.[0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${regex("^([0-9]+\\.[0-9]+)", OPENTOFU_VERSION)[0]}" : "",
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+\\.[0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${regex("^([0-9]+)", OPENTOFU_VERSION)[0]}" : "",
+
+        # Combined version tags: TG X with OT X.Y.Z / X.Y / X
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${OPENTOFU_VERSION}" : "",
+        can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${regex("^([0-9]+\\.[0-9]+)", OPENTOFU_VERSION)[0]}" : "",
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${regex("^([0-9]+)", OPENTOFU_VERSION)[0]}" : ""
     ]
 
