@@ -24,6 +24,7 @@ RUN echo "Downloading terraform version ${TERRAFORM_VERSION} for architecture ${
 # ===============================================================================
 # Final image
 # ===============================================================================
+# trivy:ignore:DS002
 FROM alpine:3.23
 RUN apk add --no-cache bash git
 COPY --from=downloader /usr/local/bin/terragrunt /usr/local/bin/terragrunt

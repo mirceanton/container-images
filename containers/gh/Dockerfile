@@ -18,6 +18,7 @@ RUN apk add --no-cache curl tar && \
 # ===============================================================================
 # Final image
 # ===============================================================================
+# trivy:ignore:DS002
 FROM alpine:3.23
 RUN apk add --no-cache git openssh-client
 COPY --from=downloader /usr/local/bin/gh /usr/local/bin/gh

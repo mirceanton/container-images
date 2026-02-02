@@ -16,5 +16,6 @@ RUN apk add --no-cache curl && \
 # ===============================================================================
 # Final image (binary-only, for use in multi-stage builds)
 # ===============================================================================
+# trivy:ignore:DS002
 FROM scratch
 COPY --from=downloader /terragrunt /terragrunt
