@@ -41,5 +41,3 @@ docker run --rm -v ~/.config/gh:/root/.config/gh ghcr.io/mirceanton/gh \
 - `gh` - GitHub CLI
 - `git` - version control
 - `openssh-client` - SSH client for git operations
-
-

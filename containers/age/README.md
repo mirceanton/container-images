@@ -34,5 +34,3 @@ docker run --rm ghcr.io/mirceanton/age -c "age-keygen --output /data/key.txt"
 - `age-keygen` - key generation tool
 - `bash` - shell
 - `git` - version control
-
-

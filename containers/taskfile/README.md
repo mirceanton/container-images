@@ -48,5 +48,3 @@ docker run --rm -v $(pwd):/workspace ghcr.io/mirceanton/taskfile \
 - `task` - Task runner
 - `bash` - shell
 - `git` - version control
-
-
