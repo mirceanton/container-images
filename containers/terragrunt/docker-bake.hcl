@@ -29,6 +29,7 @@ target "base" {
     }
 
     tags = [
+        "ghcr.io/mirceanton/terragrunt:latest",
         "ghcr.io/mirceanton/terragrunt:sha-${GIT_SHA}",
         "ghcr.io/mirceanton/terragrunt:date-${DATE}",
         "ghcr.io/mirceanton/terragrunt:${TERRAGRUNT_VERSION}",

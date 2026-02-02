@@ -41,6 +41,7 @@ docker pull ghcr.io/mirceanton/terragrunt:opentofu
 
 | Tag Pattern    | Example            | Description                    |
 | -------------- | ------------------ | ------------------------------ |
+| `:latest`      | -                  | Latest terragrunt              |
 | `:X.Y.Z`       | `:0.99.1`          | Specific terragrunt version    |
 | `:X.Y`         | `:0.99`            | Latest patch for minor version |
 | `:X`           | `:0`               | Latest for major version       |
