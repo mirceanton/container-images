@@ -8,7 +8,7 @@ variable "TERRAGRUNT_VERSION" {
 
 variable "TERRAFORM_VERSION" {
     # renovate: datasource=github-releases depName=hashicorp/terraform
-    default = "1.14.4"
+    default = "1.14.5"
 }
 
 variable "OPENTOFU_VERSION" {
