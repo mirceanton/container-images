@@ -23,7 +23,7 @@ Metrics are exposed on port `9134` at `/metrics`.
 
 ## Usage (Kubernetes)
 
-I use the bjw-s-labs/app-template helm chart to easily set up this exporter with the following values file on my Talos node:
+I use the [bjw-s-labs/app-template](https://github.com/bjw-s-labs/helm-charts/tree/main/charts/other/app-template) helm chart to easily set up this exporter with the following values file on my Talos node:
 
 ```yaml
 controllers:
