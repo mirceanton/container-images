@@ -14,7 +14,7 @@ RUN go install github.com/pdf/zfs_exporter/v2@v${ZFS_EXPORTER_VERSION}
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM alpine:3.21
+FROM alpine:3.23
 # zfs package provides the zfs/zpool CLI tools that the exporter calls at runtime.
 # Alpine 3.21 ships ZFS 2.2.7, which is compatible with OpenZFS 2.4.x kernel modules.
 RUN apk add --no-cache zfs
