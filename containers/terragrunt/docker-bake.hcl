@@ -3,7 +3,7 @@ variable "GIT_SHA" {}
 
 variable "TERRAGRUNT_VERSION" {
     # renovate: datasource=github-releases depName=gruntwork-io/terragrunt
-    default = "0.99.4"
+    default = "0.99.5"
 }
 
 variable "TERRAFORM_VERSION" {
