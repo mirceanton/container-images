@@ -13,7 +13,7 @@ variable "TERRAFORM_VERSION" {
 
 variable "OPENTOFU_VERSION" {
     # renovate: datasource=github-releases depName=opentofu/opentofu
-    default = "1.11.5"
+    default = "1.11.6"
 }
 
 # ===============================================================================
