@@ -17,7 +17,7 @@ on:
         type: string
   push:
     paths:
-      - ".github/workflows/docker-cd.yaml"
+      - ".github/workflows/release.yaml"
       - "containers/**"
 
 jobs:
