@@ -3,3 +3,4 @@
 # CI Tools
 # =================================================================================================
 "aqua:rhysd/actionlint" = "latest"
+"aqua:hadolint/hadolint" = "latest"
