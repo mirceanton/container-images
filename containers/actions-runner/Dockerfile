@@ -13,6 +13,8 @@ FROM ghcr.io/jdx/mise:${MISE_VERSION} AS mise-source
 FROM ghcr.io/actions/actions-runner:${ACTIONS_RUNNER_VERSION}
 
 USER root
+
+# hadolint ignore=DL3008
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends libatomic1 && \
@@ -25,6 +27,8 @@ ENV MISE_DATA_DIR="/opt/mise"
 ENV MISE_CACHE_DIR="/cache/mise"
 ENV MISE_YES="1"
 ENV PATH="/opt/mise/shims:$PATH"
+
+# hadolint ignore=SC2016
 RUN echo 'eval "$(mise activate bash)"' >> "${HOME}/.bashrc"
 
 ENTRYPOINT ["/bin/bash"]
