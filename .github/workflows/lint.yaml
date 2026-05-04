@@ -24,4 +24,4 @@ jobs:
         run: mise exec -- actionlint
 
       - name: Run hadolint
-        run: find ./containers -name 'Dockerfile' | xargs mise exec -- hadolint
+        run: find ./containers -name 'Dockerfile' -print0 | xargs -0 mise exec -- hadolint
