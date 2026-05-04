@@ -4,7 +4,7 @@
 # Builder stage
 # ===============================================================================
 FROM alpine:3.23 AS downloader
-SHELL [ "/bin/sh", "-o", "pipefail", "-c" ]
+SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG TERRAGRUNT_VERSION
 ARG TERRAFORM_VERSION
 ARG TARGETARCH
@@ -34,5 +34,5 @@ RUN apk add --no-cache bash git
 COPY --from=downloader /usr/local/bin/terragrunt /usr/local/bin/terragrunt
 COPY --from=downloader /usr/local/bin/terraform /usr/local/bin/terraform
 
-ENTRYPOINT ["/bin/sh"]
+ENTRYPOINT ["/bin/ash"]
 CMD ["-c", "terragrunt --version && terraform --version"]

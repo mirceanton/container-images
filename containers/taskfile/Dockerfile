@@ -4,7 +4,7 @@
 # Builder stage
 # ===============================================================================
 FROM alpine:3.23 AS downloader
-SHELL [ "/bin/sh", "-o", "pipefail", "-c" ]
+SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG TASK_VERSION
 ARG TARGETARCH
 

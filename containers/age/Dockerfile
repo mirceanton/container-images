@@ -4,7 +4,7 @@
 # Builder stage
 # ===============================================================================
 FROM alpine:3.23 AS downloader
-SHELL [ "/bin/sh", "-o", "pipefail", "-c" ]
+SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG AGE_VERSION
 ARG TARGETARCH
 
@@ -29,5 +29,5 @@ RUN apk add --no-cache bash git
 COPY --from=downloader /usr/local/bin/age /usr/local/bin/age
 COPY --from=downloader /usr/local/bin/age-keygen /usr/local/bin/age-keygen
 
-ENTRYPOINT ["/bin/sh"]
+ENTRYPOINT ["/bin/ash"]
 CMD ["-c", "age --version"]
