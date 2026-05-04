@@ -14,7 +14,7 @@ RUN apk add --no-cache gcc musl-dev zfs-dev git && \
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM alpine:3.21
+FROM alpine:3.23
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache zfs
