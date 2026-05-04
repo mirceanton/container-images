@@ -3,7 +3,7 @@
 # ===============================================================================
 # Builder stage
 # ===============================================================================
-FROM golang:1.24-alpine3.21 AS builder
+FROM golang:1.25-alpine3.21 AS builder
 ARG ZFS_EXPORTER_VERSION
 ARG TARGETARCH
 
