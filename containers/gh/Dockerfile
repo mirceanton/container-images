@@ -4,10 +4,13 @@
 # Builder stage
 # ===============================================================================
 FROM alpine:3.23 AS downloader
+SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG GH_VERSION
 ARG TARGETARCH
 
 RUN echo "Downloading GitHub CLI version ${GH_VERSION} for architecture ${TARGETARCH}"
+
+# hadolint ignore=DL3018
 RUN apk add --no-cache curl tar && \
     curl -fsSL "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_${TARGETARCH}.tar.gz" | \
     tar -xz --strip-components=1 -C /tmp && \
@@ -19,7 +22,11 @@ RUN apk add --no-cache curl tar && \
 # Final image
 # ===============================================================================
 FROM alpine:3.23
+
+# hadolint ignore=DL3018
 RUN apk add --no-cache git openssh-client
+
 COPY --from=downloader /usr/local/bin/gh /usr/local/bin/gh
+
 ENTRYPOINT ["/bin/bash"]
 CMD ["-c", "gh --version"]

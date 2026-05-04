@@ -4,10 +4,12 @@
 # Builder stage
 # ===============================================================================
 FROM alpine:3.23 AS downloader
+SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG TERRAGRUNT_VERSION
 ARG TERRAFORM_VERSION
 ARG TARGETARCH
 
+# hadolint ignore=DL3018
 RUN apk add --no-cache curl unzip
 
 RUN echo "Downloading terragrunt version ${TERRAGRUNT_VERSION} for architecture ${TARGETARCH}" && \
@@ -25,8 +27,12 @@ RUN echo "Downloading terraform version ${TERRAFORM_VERSION} for architecture ${
 # Final image
 # ===============================================================================
 FROM alpine:3.23
+
+# hadolint ignore=DL3018
 RUN apk add --no-cache bash git
+
 COPY --from=downloader /usr/local/bin/terragrunt /usr/local/bin/terragrunt
 COPY --from=downloader /usr/local/bin/terraform /usr/local/bin/terraform
-ENTRYPOINT ["/bin/sh"]
+
+ENTRYPOINT ["/bin/ash"]
 CMD ["-c", "terragrunt --version && terraform --version"]

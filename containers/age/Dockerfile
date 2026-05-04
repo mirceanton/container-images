@@ -4,10 +4,13 @@
 # Builder stage
 # ===============================================================================
 FROM alpine:3.23 AS downloader
+SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG AGE_VERSION
 ARG TARGETARCH
 
 RUN echo "Downloading age version ${AGE_VERSION} for architecture ${TARGETARCH}"
+
+# hadolint ignore=DL3018
 RUN apk add --no-cache curl tar && \
     curl -fsSL "https://github.com/FiloSottile/age/releases/download/v${AGE_VERSION}/age-v${AGE_VERSION}-linux-${TARGETARCH}.tar.gz" | \
     tar -xz -C /tmp && \
@@ -19,8 +22,12 @@ RUN apk add --no-cache curl tar && \
 # Final image
 # ===============================================================================
 FROM alpine:3.23
+
+# hadolint ignore=DL3018
 RUN apk add --no-cache bash git
+
 COPY --from=downloader /usr/local/bin/age /usr/local/bin/age
 COPY --from=downloader /usr/local/bin/age-keygen /usr/local/bin/age-keygen
-ENTRYPOINT ["/bin/sh"]
+
+ENTRYPOINT ["/bin/ash"]
 CMD ["-c", "age --version"]
