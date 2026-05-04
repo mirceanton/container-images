@@ -13,7 +13,10 @@ FROM ghcr.io/jdx/mise:${MISE_VERSION} AS mise-source
 FROM ghcr.io/actions/actions-runner:${ACTIONS_RUNNER_VERSION}
 
 USER root
-RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends libatomic1 && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=mise-source /usr/local/bin/mise /usr/local/bin/mise
 RUN mkdir -p /opt/mise /cache/mise && chown runner:runner /opt/mise /cache/mise
 
