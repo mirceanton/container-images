@@ -21,7 +21,7 @@ EXPOSE 3000
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["npx", "supergateway", \
     "--stdio", "navidrome-mcp", \
-    "--outputTransport", "streamable-http", \
+    "--outputTransport", "streamableHttp", \
     "--port", "3000", \
     "--httpPath", "/mcp", \
     "--healthEndpoint", "/healthz"]
