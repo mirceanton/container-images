@@ -3,7 +3,7 @@ variable "GIT_SHA" {}
 
 variable "NAVIDROME_MCP_VERSION" {
     # renovate: datasource=npm depName=navidrome-mcp
-    default = "2.0.0"
+    default = "2.0.1"
 }
 
 variable "SUPERGATEWAY_VERSION" {
