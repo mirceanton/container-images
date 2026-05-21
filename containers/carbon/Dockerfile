@@ -14,7 +14,7 @@ RUN apk add --no-cache git && \
 # ===============================================================================
 # Build stage
 # ===============================================================================
-FROM node:18-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
@@ -28,7 +28,7 @@ RUN yarn install --frozen-lockfile && \
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM node:18-alpine
+FROM node:24-alpine
 WORKDIR /app
 
 # hadolint ignore=DL3018
