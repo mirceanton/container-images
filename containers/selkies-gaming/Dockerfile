@@ -17,6 +17,7 @@ RUN apt-get update && \
 # -------------------------------------------------------------------------------
 # Install Steam
 # -------------------------------------------------------------------------------
+# hadolint ignore=DL3008
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -29,6 +30,7 @@ RUN dpkg --add-architecture i386 && \
 # Install Sunshine
 # -------------------------------------------------------------------------------
 ARG SUNSHINE_VERSION=2026.516.143833
+# hadolint ignore=DL3008,DL3015
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl && \
     curl -fsSL "https://github.com/LizardByte/Sunshine/releases/download/v${SUNSHINE_VERSION}/sunshine-ubuntu-24.04-amd64.deb" \
