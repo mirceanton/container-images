@@ -4,14 +4,15 @@ Monorepo for various container images.
 
 ## Available Images
 
-| Image                                                     | Description                          | Documentation                                  |
-| --------------------------------------------------------- | ------------------------------------ | ---------------------------------------------- |
-| [age](https://ghcr.io/mirceanton/age)                     | Modern encryption tool               | [README](./containers/age/README.md)           |
-| [gh](https://ghcr.io/mirceanton/gh)                       | GitHub CLI                           | [README](./containers/gh/README.md)            |
-| [navidrome-mcp](https://ghcr.io/mirceanton/navidrome-mcp) | Navidrome MCP server over HTTP       | [README](./containers/navidrome-mcp/README.md) |
-| [taskfile](https://ghcr.io/mirceanton/taskfile)           | Task runner / build tool             | [README](./containers/taskfile/README.md)      |
-| [terragrunt](https://ghcr.io/mirceanton/terragrunt)       | Infrastructure as Code orchestration | [README](./containers/terragrunt/README.md)    |
-| [zfs-exporter](https://ghcr.io/mirceanton/zfs-exporter)   | Prometheus exporter for ZFS metrics  | [README](./containers/zfs-exporter/README.md)  |
+| Image                                                       | Description                          | Documentation                                   |
+| ----------------------------------------------------------- | ------------------------------------ | ----------------------------------------------- |
+| [age](https://ghcr.io/mirceanton/age)                       | Modern encryption tool               | [README](./containers/age/README.md)            |
+| [gh](https://ghcr.io/mirceanton/gh)                         | GitHub CLI                           | [README](./containers/gh/README.md)             |
+| [navidrome-mcp](https://ghcr.io/mirceanton/navidrome-mcp)   | Navidrome MCP server over HTTP       | [README](./containers/navidrome-mcp/README.md)  |
+| [selkies-gaming](https://ghcr.io/mirceanton/selkies-gaming) | Containerized cloud gaming solution  | [README](./containers/selkies-gaming/README.md) |
+| [taskfile](https://ghcr.io/mirceanton/taskfile)             | Task runner / build tool             | [README](./containers/taskfile/README.md)       |
+| [terragrunt](https://ghcr.io/mirceanton/terragrunt)         | Infrastructure as Code orchestration | [README](./containers/terragrunt/README.md)     |
+| [zfs-exporter](https://ghcr.io/mirceanton/zfs-exporter)     | Prometheus exporter for ZFS metrics  | [README](./containers/zfs-exporter/README.md)   |
 
 ## Quick Start
 
