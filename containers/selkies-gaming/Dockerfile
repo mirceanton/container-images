@@ -32,12 +32,11 @@ RUN dpkg --add-architecture i386 && \
 # Gamescope is a Wayland nested compositor that provides DMA-BUF texture sharing,
 # enabling GPU-accelerated Steam Big Picture without the NVIDIA+XComposite black screen.
 # gamescope lives in the universe repo which is not enabled in the base image.
-# hadolint ignore=DL3008
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends software-properties-common && \
-    add-apt-repository universe && \
-    apt-get install -y --no-install-recommends gamescope && \
-    rm -rf /var/lib/apt/lists/*
+# hadolint ignore=DL3008,DL3059
+RUN printf 'deb http://archive.ubuntu.com/ubuntu noble universe\ndeb http://archive.ubuntu.com/ubuntu noble-updates universe\n' \
+        > /etc/apt/sources.list.d/noble-universe.list && \
+    apt-get update
+RUN apt-cache policy gamescope && apt-get install -y --no-install-recommends --simulate gamescope; exit 1
 
 # -------------------------------------------------------------------------------
 # Install Sunshine
