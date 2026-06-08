@@ -36,7 +36,13 @@ RUN dpkg --add-architecture i386 && \
 RUN printf 'deb http://archive.ubuntu.com/ubuntu noble universe\ndeb http://archive.ubuntu.com/ubuntu noble-updates universe\n' \
         > /etc/apt/sources.list.d/noble-universe.list && \
     apt-get update
-RUN apt-cache policy gamescope && apt-get install -y --no-install-recommends --simulate gamescope; exit 1
+RUN apt-cache policy gamescope; \
+    apt-cache show gamescope 2>&1 || true; \
+    apt-cache showpkg gamescope 2>&1 || true; \
+    apt-get install -y --no-install-recommends gamescope 2>&1 || true; \
+    apt-cache search gamescope; \
+    cat /etc/apt/preferences.d/* 2>/dev/null || echo "No pin files"; \
+    exit 1
 
 # -------------------------------------------------------------------------------
 # Install Sunshine
