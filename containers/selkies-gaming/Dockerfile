@@ -27,6 +27,16 @@ RUN dpkg --add-architecture i386 && \
     && rm -rf /var/lib/apt/lists/*
 
 # -------------------------------------------------------------------------------
+# Install Gamescope
+# -------------------------------------------------------------------------------
+# Gamescope is a Wayland nested compositor that provides DMA-BUF texture sharing,
+# enabling GPU-accelerated Steam Big Picture without the NVIDIA+XComposite black screen.
+# hadolint ignore=DL3008
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gamescope && \
+    rm -rf /var/lib/apt/lists/*
+
+# -------------------------------------------------------------------------------
 # Install Sunshine
 # -------------------------------------------------------------------------------
 ARG SUNSHINE_VERSION=2026.516.143833
