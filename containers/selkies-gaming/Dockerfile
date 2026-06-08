@@ -24,10 +24,7 @@ RUN dpkg --add-architecture i386 && \
         steam-installer \
         steam-libs-amd64 \
         steam-libs-i386 \
-    && rm -rf /var/lib/apt/lists/* \
-    # KWin + NVIDIA causes Steam to pass --disable-gpu to steamwebhelper (its CEF
-    # process), making Big Picture mode render in software. -cef-force-gpu overrides that.
-    && sed -i 's/-nobreakpad "\$@"/-nobreakpad -cef-force-gpu "\$@"/' /usr/games/steam
+    && rm -rf /var/lib/apt/lists/*
 
 # -------------------------------------------------------------------------------
 # Install Sunshine
