@@ -31,8 +31,11 @@ RUN dpkg --add-architecture i386 && \
 # -------------------------------------------------------------------------------
 # Gamescope is a Wayland nested compositor that provides DMA-BUF texture sharing,
 # enabling GPU-accelerated Steam Big Picture without the NVIDIA+XComposite black screen.
+# gamescope lives in the universe repo which is not enabled in the base image.
 # hadolint ignore=DL3008
 RUN apt-get update && \
+    apt-get install -y --no-install-recommends software-properties-common && \
+    add-apt-repository universe && \
     apt-get install -y --no-install-recommends gamescope && \
     rm -rf /var/lib/apt/lists/*
 
