@@ -3,7 +3,7 @@
 # ===============================================================================
 # Builder stage
 # ===============================================================================
-FROM alpine:3.23 AS downloader
+FROM alpine:3.24 AS downloader
 SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG TASK_VERSION
 ARG TARGETARCH
@@ -21,7 +21,7 @@ RUN apk add --no-cache curl tar && \
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM alpine:3.23
+FROM alpine:3.24
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache bash git

@@ -3,7 +3,7 @@
 # ===============================================================================
 # Builder stage
 # ===============================================================================
-FROM alpine:3.23 AS downloader
+FROM alpine:3.24 AS downloader
 SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG TERRAGRUNT_VERSION
 ARG TERRAFORM_VERSION
@@ -26,7 +26,7 @@ RUN echo "Downloading terraform version ${TERRAFORM_VERSION} for architecture ${
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM alpine:3.23
+FROM alpine:3.24
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache bash git

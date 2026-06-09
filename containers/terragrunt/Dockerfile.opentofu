@@ -3,7 +3,7 @@
 # ===============================================================================
 # Builder stage
 # ===============================================================================
-FROM alpine:3.23 AS downloader
+FROM alpine:3.24 AS downloader
 SHELL [ "/bin/ash", "-o", "pipefail", "-c" ]
 ARG TERRAGRUNT_VERSION
 ARG OPENTOFU_VERSION
@@ -25,7 +25,7 @@ RUN echo "Downloading opentofu version ${OPENTOFU_VERSION} for architecture ${TA
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM alpine:3.23
+FROM alpine:3.24
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache bash git
