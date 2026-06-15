@@ -55,13 +55,7 @@ To override the supergateway defaults (port, path, etc.):
 docker run --rm -p 8080:8080 \
   -v /path/to/settings.json:/config/settings.json:ro \
   -e NAVIDROME_CONFIG_PATH=/config/settings.json \
-  ghcr.io/mirceanton/navidrome-mcp:latest \
-  npx supergateway \
-    --stdio navidrome-mcp \
-    --outputTransport streamableHttp \
-    --port 8080 \
-    --httpPath /mcp \
-    --healthEndpoint /healthz
+  ghcr.io/mirceanton/navidrome-mcp:latest
 ```
 
 ## Included Tools

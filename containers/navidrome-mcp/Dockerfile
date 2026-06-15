@@ -22,6 +22,7 @@ ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["npx", "supergateway", \
     "--stdio", "navidrome-mcp", \
     "--outputTransport", "streamableHttp", \
+    "--stateful", \
     "--port", "3000", \
     "--httpPath", "/mcp", \
     "--healthEndpoint", "/healthz"]
