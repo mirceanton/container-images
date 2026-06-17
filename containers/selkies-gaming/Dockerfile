@@ -50,4 +50,32 @@ COPY files/input-watcher.conf /etc/supervisor/conf.d/input-watcher.conf
 COPY files/input-watcher.sh   /etc/sunshine/input-watcher.sh
 RUN chmod +x /etc/sunshine/input-watcher.sh
 
+# Audio router: re-links orphaned app audio streams back into Sunshine's capture
+# sink. Sunshine's per-session audio teardown unlinks game/Steam output streams
+# on disconnect and they don't re-attach on reconnect -> silent stream. This loop
+# keeps app audio connected so sound survives disconnect/reconnect cycles.
+COPY files/audio-router.conf /etc/supervisor/conf.d/audio-router.conf
+COPY files/audio-router.sh   /etc/sunshine/audio-router.sh
+RUN chmod +x /etc/sunshine/audio-router.sh
+
+# -------------------------------------------------------------------------------
+# Sunshine-only: disable Selkies WebRTC + its joystick interposer
+# -------------------------------------------------------------------------------
+# This is a Sunshine/Moonlight (couch) image. Selkies and Sunshine cannot coexist:
+#   1. Selkies' LD_PRELOAD joystick interposer (exported from /etc/entrypoint.sh)
+#      hijacks controller input to the browser Gamepad API, which is empty when
+#      streaming over Moonlight -> dead controller in-game.
+#   2. selkies-gstreamer competes with Sunshine for PulseAudio capture.
+# So we (1) neuter the selkies-gstreamer supervisor program (no Selkies, no
+# turnserver), and (2) strip the interposer env + fake js node creation from the
+# desktop entrypoint so Steam/games use Sunshine's real uinput devices instead.
+COPY files/disable-selkies.sh /etc/selkies-gstreamer-entrypoint.sh
+RUN chmod +x /etc/selkies-gstreamer-entrypoint.sh && \
+    sed -i \
+        -e '/SELKIES_INTERPOSER/d' \
+        -e '/SDL_JOYSTICK_DEVICE/d' \
+        -e '/touch \/dev\/input\/js/d' \
+        -e '/chmod .*\/dev\/input\/js/d' \
+        /etc/entrypoint.sh
+
 USER ubuntu
