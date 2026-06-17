@@ -4,6 +4,10 @@ variable "UBUNTU_VERSION" {
     # renovate: datasource=docker depName=ghcr.io/selkies-project/nvidia-glx-desktop
     default = "24.04"
 }
+variable "SUNSHINE_VERSION" {
+    # renovate: datasource=github-releases depName=LizardByte/Sunshine extractVersion=^v(?<version>.+)$
+    default = "2026.516.143833"
+}
 
 target "default" {
     context    = "."
@@ -11,7 +15,8 @@ target "default" {
     no-cache   = false
     platforms  = ["linux/amd64"]
     args = {
-        UBUNTU_VERSION = UBUNTU_VERSION
+        UBUNTU_VERSION   = UBUNTU_VERSION
+        SUNSHINE_VERSION = SUNSHINE_VERSION
     }
 
     tags = [
@@ -19,6 +24,7 @@ target "default" {
         "ghcr.io/mirceanton/selkies-gaming:sha-${GIT_SHA}",
         "ghcr.io/mirceanton/selkies-gaming:date-${DATE}",
         "ghcr.io/mirceanton/selkies-gaming:${UBUNTU_VERSION}",
+        "ghcr.io/mirceanton/selkies-gaming:${UBUNTU_VERSION}-sunshine-${SUNSHINE_VERSION}",
     ]
 
     labels = {
@@ -29,9 +35,9 @@ target "default" {
         "org.opencontainers.image.licenses" = "MIT"
 
         "org.opencontainers.image.title"       = "Selkies Gaming Desktop"
-        "org.opencontainers.image.authors"     = "selkies-project"
-        "org.opencontainers.image.description" = "NVIDIA-accelerated Ubuntu desktop with WebRTC streaming (Selkies) and Steam"
+        "org.opencontainers.image.authors"     = "selkies-project, LizardByte"
+        "org.opencontainers.image.description" = "NVIDIA-accelerated Ubuntu desktop with WebRTC streaming (Selkies), Moonlight streaming (Sunshine), and Steam"
         "org.opencontainers.image.url"         = "https://github.com/selkies-project/docker-selkies-glx-desktop"
-        "org.opencontainers.image.version"     = "${UBUNTU_VERSION}"
+        "org.opencontainers.image.version"     = "${UBUNTU_VERSION}-sunshine-${SUNSHINE_VERSION}"
     }
 }
