@@ -50,6 +50,14 @@ COPY files/input-watcher.conf /etc/supervisor/conf.d/input-watcher.conf
 COPY files/input-watcher.sh   /etc/sunshine/input-watcher.sh
 RUN chmod +x /etc/sunshine/input-watcher.sh
 
+# Audio router: re-links orphaned app audio streams back into Sunshine's capture
+# sink. Sunshine's per-session audio teardown unlinks game/Steam output streams
+# on disconnect and they don't re-attach on reconnect -> silent stream. This loop
+# keeps app audio connected so sound survives disconnect/reconnect cycles.
+COPY files/audio-router.conf /etc/supervisor/conf.d/audio-router.conf
+COPY files/audio-router.sh   /etc/sunshine/audio-router.sh
+RUN chmod +x /etc/sunshine/audio-router.sh
+
 # -------------------------------------------------------------------------------
 # Sunshine-only: disable Selkies WebRTC + its joystick interposer
 # -------------------------------------------------------------------------------
