@@ -11,7 +11,7 @@
 # start (matching the host kernel driver via the NVIDIA Container Toolkit), so the
 # "NVIDIA driver installer dependencies" below must stay.
 
-ARG UBUNTU_VERSION=24.04
+ARG UBUNTU_VERSION=26.04
 FROM ubuntu:${UBUNTU_VERSION}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

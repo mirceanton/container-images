@@ -2,7 +2,7 @@ DATE = formatdate( "YYYY.MM.DD", timestamp() )
 variable "GIT_SHA" {}
 variable "UBUNTU_VERSION" {
     # renovate: datasource=docker depName=ubuntu
-    default = "24.04"
+    default = "26.04"
 }
 variable "SUNSHINE_VERSION" {
     # renovate: datasource=github-releases depName=LizardByte/Sunshine extractVersion=^v(?<version>.+)$
