@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Set Wallpaper
+Comment=Apply the embedded desktop wallpaper
+Exec=/usr/local/bin/set-wallpaper.sh
+OnlyShowIn=XFCE;
+X-XFCE-Autostart-Phase=Application
+NoDisplay=true

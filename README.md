@@ -11,7 +11,7 @@ Monorepo for various container images.
 | [carbon](https://ghcr.io/mirceanton/carbon)                 | Self-hosted carbon.now.sh            | [README](./containers/carbon/README.md)         |
 | [gh](https://ghcr.io/mirceanton/gh)                         | GitHub CLI                           | [README](./containers/gh/README.md)             |
 | [navidrome-mcp](https://ghcr.io/mirceanton/navidrome-mcp)   | Navidrome MCP server over HTTP       | [README](./containers/navidrome-mcp/README.md)  |
-| [selkies-gaming](https://ghcr.io/mirceanton/selkies-gaming) | Containerized cloud gaming solution  | [README](./containers/selkies-gaming/README.md) |
+| [steam-sunshine](https://ghcr.io/mirceanton/steam-sunshine) | NVIDIA + Steam + Sunshine couch gaming | [README](./containers/steam-sunshine/README.md) |
 | [taskfile](https://ghcr.io/mirceanton/taskfile)             | Task runner / build tool             | [README](./containers/taskfile/README.md)       |
 | [terragrunt](https://ghcr.io/mirceanton/terragrunt)         | Infrastructure as Code orchestration | [README](./containers/terragrunt/README.md)     |
 | [zfs-exporter](https://ghcr.io/mirceanton/zfs-exporter)     | Prometheus exporter for ZFS metrics  | [README](./containers/zfs-exporter/README.md)   |
