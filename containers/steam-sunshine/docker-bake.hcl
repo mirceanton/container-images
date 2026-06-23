@@ -1,7 +1,7 @@
 DATE = formatdate( "YYYY.MM.DD", timestamp() )
 variable "GIT_SHA" {}
 variable "UBUNTU_VERSION" {
-    # renovate: datasource=docker depName=ghcr.io/selkies-project/nvidia-glx-desktop
+    # renovate: datasource=docker depName=ubuntu
     default = "24.04"
 }
 variable "SUNSHINE_VERSION" {
@@ -20,11 +20,11 @@ target "default" {
     }
 
     tags = [
-        "ghcr.io/mirceanton/selkies-gaming:latest",
-        "ghcr.io/mirceanton/selkies-gaming:sha-${GIT_SHA}",
-        "ghcr.io/mirceanton/selkies-gaming:date-${DATE}",
-        "ghcr.io/mirceanton/selkies-gaming:${UBUNTU_VERSION}",
-        "ghcr.io/mirceanton/selkies-gaming:${UBUNTU_VERSION}-sunshine-${SUNSHINE_VERSION}",
+        "ghcr.io/mirceanton/steam-sunshine:latest",
+        "ghcr.io/mirceanton/steam-sunshine:sha-${GIT_SHA}",
+        "ghcr.io/mirceanton/steam-sunshine:date-${DATE}",
+        "ghcr.io/mirceanton/steam-sunshine:${UBUNTU_VERSION}",
+        "ghcr.io/mirceanton/steam-sunshine:${UBUNTU_VERSION}-sunshine-${SUNSHINE_VERSION}",
     ]
 
     labels = {
@@ -34,10 +34,10 @@ target "default" {
         "org.opencontainers.image.revision" = "${GIT_SHA}"
         "org.opencontainers.image.licenses" = "MIT"
 
-        "org.opencontainers.image.title"       = "Selkies Gaming Desktop"
+        "org.opencontainers.image.title"       = "Steam + Sunshine"
         "org.opencontainers.image.authors"     = "selkies-project, LizardByte"
-        "org.opencontainers.image.description" = "NVIDIA-accelerated Ubuntu desktop with WebRTC streaming (Selkies), Moonlight streaming (Sunshine), and Steam"
-        "org.opencontainers.image.url"         = "https://github.com/selkies-project/docker-selkies-glx-desktop"
+        "org.opencontainers.image.description" = "Lean NVIDIA-accelerated Ubuntu image with Steam and Sunshine (Moonlight) for couch/controller game streaming"
+        "org.opencontainers.image.url"         = "https://github.com/mirceanton/container-images"
         "org.opencontainers.image.version"     = "${UBUNTU_VERSION}-sunshine-${SUNSHINE_VERSION}"
     }
 }

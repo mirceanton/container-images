@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- System-wide xfwm4 default: disable compositing. The screen is captured by
+     Sunshine via NvFBC, so a compositor only adds latency and can introduce
+     tearing/redirection overhead with no visual benefit over the stream. -->
+<channel name="xfwm4" version="1.0">
+  <property name="general" type="empty">
+    <property name="use_compositing" type="bool" value="false"/>
+  </property>
+</channel>
