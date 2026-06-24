@@ -84,6 +84,10 @@ RUN dpkg --add-architecture i386 && \
         nano \
         htop \
         nvtop \
+        # Network diagnostics (bandwidth / latency / packet loss -- stream quality)
+        iperf3 \
+        mtr-tiny \
+        iftop \
         # Process manager
         supervisor \
         # Audio (PipeWire/ALSA compat libs; the PipeWire stack itself is added below)
@@ -98,6 +102,9 @@ RUN dpkg --add-architecture i386 && \
         # GL / Vulkan diagnostics + loader
         mesa-utils \
         vulkan-tools \
+        # In-game FPS/frametime/GPU/CPU overlay (Proton: `mangohud %command%`).
+        # amd64-only in Ubuntu; the overlay is unavailable for 32-bit titles.
+        mangohud \
         libvulkan1 \
         libvulkan1:i386 \
         # NVIDIA driver installer dependencies (driver userspace is installed at runtime by entrypoint.sh)
