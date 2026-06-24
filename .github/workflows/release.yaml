@@ -31,7 +31,7 @@ jobs:
 
       - name: Find Containers
         id: discover
-        uses: mirceanton/action-folder-matrix@32305f568b8403cd1e91d81bf7a3b2054a833809 # v3.0.4
+        uses: mirceanton/action-folder-matrix@2bda5e9e69589b18c283022234127b0b20ce747e # v3.0.5
         with:
           path: ./containers
           changed-only: ${{ github.event_name != 'workflow_dispatch' }}
