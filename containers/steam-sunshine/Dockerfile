@@ -83,6 +83,7 @@ RUN dpkg --add-architecture i386 && \
         gzip \
         nano \
         htop \
+        nvtop \
         # Process manager
         supervisor \
         # Audio (PipeWire/ALSA compat libs; the PipeWire stack itself is added below)
