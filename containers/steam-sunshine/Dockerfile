@@ -247,6 +247,11 @@ COPY files/set-wallpaper.sh    /usr/local/bin/set-wallpaper.sh
 COPY files/set-wallpaper.desktop /etc/xdg/autostart/set-wallpaper.desktop
 RUN chmod 0755 /usr/local/bin/set-wallpaper.sh
 
+# System-wide MangoHud overlay preset (applies to every game; per-user config in
+# ~/.config/MangoHud/MangoHud.conf overrides it). Enable per game with the Proton
+# launch option `mangohud %command%`; toggle in-game with Right Shift + F12.
+COPY files/MangoHud.conf /etc/MangoHud.conf
+
 # -------------------------------------------------------------------------------
 # PipeWire + WirePlumber (upstream PPA) -- Sunshine captures audio from this stack.
 # -------------------------------------------------------------------------------
