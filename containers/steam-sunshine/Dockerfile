@@ -295,7 +295,12 @@ ARG SUNSHINE_VERSION=2026.516.143833
 RUN curl -fsSL "https://github.com/LizardByte/Sunshine/releases/download/v${SUNSHINE_VERSION}/sunshine-ubuntu-24.04-amd64.deb" \
         -o /tmp/sunshine.deb && \
     apt-get update && \
-    apt-get install -y /tmp/sunshine.deb && \
+    apt-get install -y /tmp/sunshine.deb libcap2-bin && \
+    # Privileged containers running as uid 1000 do not get CAP_SYS_NICE in the
+    # effective set (same reason ownership matters more than privilege for CAP_DAC_OVERRIDE
+    # above). A file capability grants it at exec time regardless of the caller's uid,
+    # so Sunshine's encode/capture threads can call setpriority(-10/-15) without EPERM.
+    setcap cap_sys_nice=eip /usr/bin/sunshine && \
     rm -f /tmp/sunshine.deb && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /var/cache/debconf/* /var/log/* /tmp/* /var/tmp/*
