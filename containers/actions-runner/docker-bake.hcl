@@ -7,7 +7,7 @@ variable "MISE_VERSION" {
 }
 variable "ACTIONS_RUNNER_VERSION" {
     # renovate: datasource=docker depName=ghcr.io/actions/actions-runner
-    default = "2.336.0"
+    default = "2.337.0"
 }
 
 target "default" {
