@@ -4,17 +4,18 @@ Monorepo for various container images.
 
 ## Available Images
 
-| Image                                                       | Description                          | Documentation                                   |
-| ----------------------------------------------------------- | ------------------------------------ | ----------------------------------------------- |
-| [actions-runner](https://ghcr.io/mirceanton/age)            | Custom GHA runner image for my org.  | [README](./containers/actions-runner/README.md) |
-| [age](https://ghcr.io/mirceanton/age)                       | Modern encryption tool               | [README](./containers/age/README.md)            |
-| [carbon](https://ghcr.io/mirceanton/carbon)                 | Self-hosted carbon.now.sh            | [README](./containers/carbon/README.md)         |
-| [gh](https://ghcr.io/mirceanton/gh)                         | GitHub CLI                           | [README](./containers/gh/README.md)             |
-| [navidrome-mcp](https://ghcr.io/mirceanton/navidrome-mcp)   | Navidrome MCP server over HTTP       | [README](./containers/navidrome-mcp/README.md)  |
-| [steam-sunshine](https://ghcr.io/mirceanton/steam-sunshine) | NVIDIA + Steam + Sunshine couch gaming | [README](./containers/steam-sunshine/README.md) |
-| [taskfile](https://ghcr.io/mirceanton/taskfile)             | Task runner / build tool             | [README](./containers/taskfile/README.md)       |
-| [terragrunt](https://ghcr.io/mirceanton/terragrunt)         | Infrastructure as Code orchestration | [README](./containers/terragrunt/README.md)     |
-| [zfs-exporter](https://ghcr.io/mirceanton/zfs-exporter)     | Prometheus exporter for ZFS metrics  | [README](./containers/zfs-exporter/README.md)   |
+| Image                                                                      | Description                                   | Documentation                                           |
+| --------------------------------------------------------------------------- | ------------------------------------------------ | ---------------------------------------------------------- |
+| [actions-runner](https://ghcr.io/mirceanton/age)                          | Custom GHA runner image for my org.           | [README](./containers/actions-runner/README.md)         |
+| [age](https://ghcr.io/mirceanton/age)                                     | Modern encryption tool                        | [README](./containers/age/README.md)                    |
+| [carbon](https://ghcr.io/mirceanton/carbon)                               | Self-hosted carbon.now.sh                     | [README](./containers/carbon/README.md)                 |
+| [claude-remote-control](https://ghcr.io/mirceanton/claude-remote-control) | Always-on Claude Code `remote-control` server | [README](./containers/claude-remote-control/README.md) |
+| [gh](https://ghcr.io/mirceanton/gh)                                       | GitHub CLI                                    | [README](./containers/gh/README.md)                     |
+| [navidrome-mcp](https://ghcr.io/mirceanton/navidrome-mcp)                 | Navidrome MCP server over HTTP                | [README](./containers/navidrome-mcp/README.md)          |
+| [steam-sunshine](https://ghcr.io/mirceanton/steam-sunshine)               | NVIDIA + Steam + Sunshine couch gaming        | [README](./containers/steam-sunshine/README.md)         |
+| [taskfile](https://ghcr.io/mirceanton/taskfile)                           | Task runner / build tool                      | [README](./containers/taskfile/README.md)               |
+| [terragrunt](https://ghcr.io/mirceanton/terragrunt)                       | Infrastructure as Code orchestration          | [README](./containers/terragrunt/README.md)             |
+| [zfs-exporter](https://ghcr.io/mirceanton/zfs-exporter)                   | Prometheus exporter for ZFS metrics           | [README](./containers/zfs-exporter/README.md)           |
 
 ## Quick Start
 
