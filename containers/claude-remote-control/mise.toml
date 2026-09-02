@@ -1,5 +1,0 @@
-[tools]
-# Bootstrap runtime only -- this is what `claude` itself needs to run.
-# Every other tool (kubectl, helm, k9s, go, ...) resolves per-repo at
-# runtime from that repo's own mise.toml. Do not add tools here.
-node = "24.20.0"

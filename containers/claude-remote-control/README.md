@@ -2,7 +2,7 @@
 
 Runs [Claude Code](https://github.com/anthropics/claude-code) as an always-on `claude remote-control` server, so it shows up as a "device" in the Claude mobile app / claude.ai/code — meant to run as a long-lived pod rather than on a laptop.
 
-mise is used only to bootstrap the Node.js runtime `claude` itself needs. It stays installed and live in the final image (not stripped after build), because it's also how *other* tools resolve: every repo the agent works in pins its own `kubectl`/`helm`/`go`/etc. versions in its own `mise.toml`, and mise auto-installs/auto-trusts those on `cd` at runtime. Nothing beyond Node is baked into this image on purpose -- see [Included tooling](#included-tooling).
+Node.js (via NodeSource's apt repo) and the `claude` CLI (via `npm install -g`) are the only things baked in beyond base OS packages. mise itself is also installed and stays live in the image -- not to manage Node, but because it's how *other* tools resolve: every repo the agent works in pins its own `kubectl`/`helm`/`go`/etc. versions in its own `mise.toml`, and mise auto-installs/auto-trusts those on `cd` at runtime. Nothing beyond Node and the `claude` CLI is baked in on purpose -- see [Included tooling](#included-tooling).
 
 ## Usage
 
@@ -65,9 +65,9 @@ This only proves the process hasn't exited (it can't detect a hung-but-alive pro
 
 ## Included tooling
 
-- `mise` -- present and active at runtime (shims on `PATH`), used only to bootstrap Node at build time and to resolve whatever tools *other* repos pin at runtime
-- Node.js `24.20.0` (LTS), installed via mise
-- `@anthropic-ai/claude-code` (`claude` CLI), installed via `npm install -g` into a fixed, node-version-independent prefix
+- Node.js (current LTS major, via NodeSource's apt repo -- Debian's own `nodejs` package is too old for the `claude` CLI's `engines` requirement)
+- `@anthropic-ai/claude-code` (`claude` CLI), installed via `npm install -g`
+- `mise` -- present and active at runtime (shims on `PATH`), used only to resolve whatever tools *other* repos pin in their own `mise.toml`, never for Node itself
 - `git`, `openssh-client`, `curl`, `unzip`, `ca-certificates` -- baseline utilities, not version-pinned project tooling
 
 Deliberately **not** included: `kubectl`, `helm`, `k9s`, `go`, or any other project-specific tool. Those are pinned per-repo in each repo's own `mise.toml` and resolve at runtime -- baking them into this image would create a second, drifting source of truth.
