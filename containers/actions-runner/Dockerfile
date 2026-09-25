@@ -12,6 +12,7 @@ FROM ghcr.io/jdx/mise:${MISE_VERSION} AS mise-source
 # ===============================================================================
 FROM ghcr.io/actions/actions-runner:${ACTIONS_RUNNER_VERSION}
 
+# hadolint ignore=DL3066
 USER root
 
 # hadolint ignore=DL3008
@@ -22,6 +23,7 @@ RUN apt-get update && \
 COPY --from=mise-source /usr/local/bin/mise /usr/local/bin/mise
 RUN mkdir -p /opt/mise /cache/mise && chown runner:runner /opt/mise /cache/mise
 
+# hadolint ignore=DL3066
 USER runner
 ENV MISE_DATA_DIR="/opt/mise"
 ENV MISE_CACHE_DIR="/cache/mise"
