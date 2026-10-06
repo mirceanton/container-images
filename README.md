@@ -13,6 +13,7 @@ Monorepo for various container images.
 | [steam-sunshine](https://ghcr.io/mirceanton/steam-sunshine) | NVIDIA + Steam + Sunshine couch gaming | [README](./containers/steam-sunshine/README.md) |
 | [taskfile](https://ghcr.io/mirceanton/taskfile)             | Task runner / build tool               | [README](./containers/taskfile/README.md)       |
 | [terragrunt](https://ghcr.io/mirceanton/terragrunt)         | Infrastructure as Code orchestration   | [README](./containers/terragrunt/README.md)     |
+| [truenas-mcp](https://ghcr.io/mirceanton/truenas-mcp)       | Official TrueNAS MCP server over HTTP  | [README](./containers/truenas-mcp/README.md)    |
 | [zfs-exporter](https://ghcr.io/mirceanton/zfs-exporter)     | Prometheus exporter for ZFS metrics    | [README](./containers/zfs-exporter/README.md)   |
 
 ## Quick Start
