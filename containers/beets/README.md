@@ -77,24 +77,7 @@ docker run --rm \
 5. **Suspicious numbering** — track gaps, duplicate track numbers
 6. **Ambiguous matches** — albums with multiple plausible MusicBrainz candidates
 7. **High-confidence matches** — single clear MusicBrainz matches (reconciliation candidates)
-8. **Reconciliation plan** (dry-run) — preview of mbsync changes + MBID assignments
-9. **Existing tags** — genre and mood distribution (visibility only)
-
-### Reconciliation modes
-
-| Mode | Flag | What it does |
-|------|------|-------------|
-| Dry-run | `--dry-run` (default) | Full audit + preview of proposed changes. No writes. |
-| Apply (both) | `--apply` | Assign MBIDs + mbsync. Writes tags. |
-| Apply (mbsync only) | `--apply --reconcile-mode mbsync` | Only refresh items that already have MBIDs. |
-| Apply (match only) | `--apply --reconcile-mode match` | Only assign MBIDs to new high-confidence matches. |
-
-Apply mode:
-- **Never moves or renames files** (mbsync uses `-M`)
-- Only writes tags for items with valid MusicBrainz IDs
-- High-confidence = single MB search result (watch for wrong editions)
-- Writes artist, album, year, track info, MBIDs, and other standard metadata
-- Does NOT touch genre, mood, or other custom fields
+8. **Existing tags** — genre and mood distribution (visibility only)
 
 ### Future Reconciliation
 
