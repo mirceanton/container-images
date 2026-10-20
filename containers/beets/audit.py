@@ -127,7 +127,7 @@ def init_beets_lib(music_dir: str, db_path: str) -> Library:
     lib = Library(db_path, directory=music_dir)
     result = subprocess.run(
         ["beet", "-l", db_path, "-d", music_dir,
-         "import", "-A", "-C", "-W", "-q", music_dir],
+         "import", "-C", "-W", "-q", music_dir],
         capture_output=True, text=True, timeout=3600,
     )
     if result.returncode != 0:

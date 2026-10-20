@@ -3,7 +3,7 @@ variable "GIT_SHA" {}
 
 variable "BEETS_VERSION" {
     # renovate: datasource=pypi depName=beets
-    default = "2.14.1"
+    default = "2.3.1"
 }
 
 variable "MUTAGEN_VERSION" {
