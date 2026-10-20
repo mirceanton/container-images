@@ -2,7 +2,7 @@ DATE = formatdate( "YYYY.MM.DD", timestamp() )
 variable "GIT_SHA" {}
 variable "VERSION" {
     # renovate: datasource=github-releases depName=pdf/zfs_exporter
-    default = "2.5.0"
+    default = "2.5.1"
 }
 
 target "default" {
