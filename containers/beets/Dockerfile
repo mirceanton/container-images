@@ -32,12 +32,15 @@ ARG MUTAGEN_VERSION=1.47.0
 ARG PYYAML_VERSION=6.0.3
 # renovate: datasource=pypi depName=requests
 ARG REQUESTS_VERSION=2.32.5
+# renovate: datasource=pypi depName=lap
+ARG LAP_VERSION=0.5.13
 
 RUN pip install --no-cache-dir \
     "beets[fetchart,lyrics,lastgenre,chroma,scrub]==${BEETS_VERSION}" \
     "mutagen==${MUTAGEN_VERSION}" \
     "pyyaml==${PYYAML_VERSION}" \
-    "requests==${REQUESTS_VERSION}"
+    "requests==${REQUESTS_VERSION}" \
+    "lap==${LAP_VERSION}"
 
 WORKDIR /app
 

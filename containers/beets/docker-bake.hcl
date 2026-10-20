@@ -3,12 +3,12 @@ variable "GIT_SHA" {}
 
 variable "BEETS_VERSION" {
     # renovate: datasource=pypi depName=beets
-    default = "2.14.1"
+    default = "2.3.1"
 }
 
 variable "MUTAGEN_VERSION" {
     # renovate: datasource=pypi depName=mutagen
-    default = "1.48.1"
+    default = "1.47.0"
 }
 
 variable "PYYAML_VERSION" {
@@ -18,7 +18,12 @@ variable "PYYAML_VERSION" {
 
 variable "REQUESTS_VERSION" {
     # renovate: datasource=pypi depName=requests
-    default = "2.34.2"
+    default = "2.32.5"
+}
+
+variable "LAP_VERSION" {
+    # renovate: datasource=pypi depName=lap
+    default = "0.5.13"
 }
 
 target "default" {
@@ -31,6 +36,7 @@ target "default" {
         MUTAGEN_VERSION  = MUTAGEN_VERSION
         PYYAML_VERSION   = PYYAML_VERSION
         REQUESTS_VERSION = REQUESTS_VERSION
+        LAP_VERSION      = LAP_VERSION
     }
 
     tags = [
