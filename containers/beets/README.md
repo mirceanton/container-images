@@ -43,26 +43,29 @@ The `audit.py` script scans a music library and produces:
 ### Usage
 
 ```bash
-# Report-only audit (default)
+# Dry-run audit (default — report only, no writes)
 docker run --rm \
   -v /path/to/music:/music:ro \
   -v /path/to/data:/data \
-  ghcr.io/mirceanton/beets:latest /music
+  ghcr.io/mirceanton/beets:latest /music --dry-run
 
-# With custom paths
+# Apply reconciliation (write MBIDs + mbsync for high-confidence matches)
 docker run --rm \
-  -v /path/to/music:/music:ro \
+  -v /path/to/music:/music \
   -v /path/to/data:/data \
-  ghcr.io/mirceanton/beets:latest /music \
-  --db /data/mylibrary.db \
-  --config /data/myconfig.yaml \
-  --output /data/reports
+  ghcr.io/mirceanton/beets:latest /music --apply
+
+# Only refresh items that already have MBIDs (skip new MBID assignments)
+docker run --rm \
+  -v /path/to/music:/music \
+  -v /path/to/data:/data \
+  ghcr.io/mirceanton/beets:latest /music --apply --reconcile-mode mbsync
 
 # Verbose
 docker run --rm \
   -v /path/to/music:/music:ro \
   -v /path/to/data:/data \
-  ghcr.io/mirceanton/beets:latest /music --verbose
+  ghcr.io/mirceanton/beets:latest /music --dry-run --verbose
 ```
 
 ### Report Contents
@@ -74,7 +77,24 @@ docker run --rm \
 5. **Suspicious numbering** — track gaps, duplicate track numbers
 6. **Ambiguous matches** — albums with multiple plausible MusicBrainz candidates
 7. **High-confidence matches** — single clear MusicBrainz matches (reconciliation candidates)
-8. **Existing tags** — genre and mood distribution (visibility only)
+8. **Reconciliation plan** (dry-run) — preview of mbsync changes + MBID assignments
+9. **Existing tags** — genre and mood distribution (visibility only)
+
+### Reconciliation modes
+
+| Mode | Flag | What it does |
+|------|------|-------------|
+| Dry-run | `--dry-run` (default) | Full audit + preview of proposed changes. No writes. |
+| Apply (both) | `--apply` | Assign MBIDs + mbsync. Writes tags. |
+| Apply (mbsync only) | `--apply --reconcile-mode mbsync` | Only refresh items that already have MBIDs. |
+| Apply (match only) | `--apply --reconcile-mode match` | Only assign MBIDs to new high-confidence matches. |
+
+Apply mode:
+- **Never moves or renames files** (mbsync uses `-M`)
+- Only writes tags for items with valid MusicBrainz IDs
+- High-confidence = single MB search result (watch for wrong editions)
+- Writes artist, album, year, track info, MBIDs, and other standard metadata
+- Does NOT touch genre, mood, or other custom fields
 
 ### Future Reconciliation
 
