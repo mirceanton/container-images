@@ -18,7 +18,7 @@ RUN git checkout "${ESSENTIA_TAGGER_REV}"
 # ===============================================================================
 # Final image — mirrors the upstream Dockerfile with pinned source code
 # ===============================================================================
-FROM python:3.10-slim
+FROM python:3.15-slim
 
 # Install system dependencies required by Essentia
 # hadolint ignore=DL3008

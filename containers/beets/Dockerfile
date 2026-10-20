@@ -6,7 +6,7 @@
 # Base: python:3.13-slim
 # Includes: beets, mutagen, and the library audit script.
 # ===============================================================================
-FROM python:3.13-slim
+FROM python:3.15-slim
 
 # Install system dependencies for audio format support
 # hadolint ignore=DL3008
