@@ -23,7 +23,7 @@ variable "REQUESTS_VERSION" {
 
 variable "LAP_VERSION" {
     # renovate: datasource=pypi depName=lap
-    default = "0.4.0"
+    default = "0.5.13"
 }
 
 target "default" {
