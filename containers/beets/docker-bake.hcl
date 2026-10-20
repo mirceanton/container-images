@@ -18,7 +18,7 @@ variable "PYYAML_VERSION" {
 
 variable "REQUESTS_VERSION" {
     # renovate: datasource=pypi depName=requests
-    default = "2.32.5"
+    default = "2.34.2"
 }
 
 target "default" {
