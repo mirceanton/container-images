@@ -8,7 +8,7 @@ variable "BEETS_VERSION" {
 
 variable "MUTAGEN_VERSION" {
     # renovate: datasource=pypi depName=mutagen
-    default = "1.47.0"
+    default = "1.48.1"
 }
 
 variable "PYYAML_VERSION" {
