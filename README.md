@@ -6,14 +6,10 @@ Monorepo for various container images.
 
 | Image                                                       | Description                            | Documentation                                   |
 | ------------------------------------------------------------ | -------------------------------------- | ----------------------------------------------- |
-| [actions-runner](https://ghcr.io/mirceanton/age)            | Custom GHA runner image for my org.    | [README](./containers/actions-runner/README.md) |
-| [age](https://ghcr.io/mirceanton/age)                       | Modern encryption tool                 | [README](./containers/age/README.md)            |
+| [actions-runner](https://ghcr.io/mirceanton/actions-runner) | Custom GHA runner image for my org.    | [README](./containers/actions-runner/README.md) |
 | [carbon](https://ghcr.io/mirceanton/carbon)                 | Self-hosted carbon.now.sh              | [README](./containers/carbon/README.md)         |
-| [filmcraft](https://ghcr.io/mirceanton/filmcraft)         | Headless NLE video editor + MCP server  | [README](./containers/filmcraft/README.md)     |
-| [gh](https://ghcr.io/mirceanton/gh)                         | GitHub CLI                             | [README](./containers/gh/README.md)             |
-| [steam-sunshine](https://ghcr.io/mirceanton/steam-sunshine) | NVIDIA + Steam + Sunshine couch gaming | [README](./containers/steam-sunshine/README.md) |
-| [taskfile](https://ghcr.io/mirceanton/taskfile)             | Task runner / build tool               | [README](./containers/taskfile/README.md)       |
-| [terragrunt](https://ghcr.io/mirceanton/terragrunt)         | Infrastructure as Code orchestration   | [README](./containers/terragrunt/README.md)     |
+| [filmcraft](https://ghcr.io/mirceanton/filmcraft)           | Headless NLE video editor + MCP server | [README](./containers/filmcraft/README.md)      |
+| [zfs-exporter](https://ghcr.io/mirceanton/zfs-exporter)     | Prometheus exporter for ZFS metrics    | [README](./containers/zfs-exporter/README.md)   |
 
 ## Quick Start
 
@@ -38,7 +34,7 @@ Unless otherwise specified, images follow a consistent tagging scheme:
 | `:sha-<hash>`  | Specific git commit               |
 | `:date-<date>` | Build date                        |
 
-Some images (like terragrunt) have additional tag patterns for variant images. See the individual READMEs for details.
+Some images have additional tag patterns for variant images. See the individual READMEs for details.
 
 ## License
 
