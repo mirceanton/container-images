@@ -19,9 +19,8 @@ RUN apk add --no-cache curl tar && \
     actual="$(sha256sum /tmp/filmcraft.tar.gz | awk '{print $1}')" && \
     [ "${expected}" = "${actual}" ] || ( echo "Checksum mismatch: expected ${expected}, got ${actual}" && exit 1 ) && \
     tar -xzf /tmp/filmcraft.tar.gz -C /tmp && \
-    filmcraft_dir="$(find /tmp -maxdepth 1 -type d -name "filmcraft*" ! -name "filmcraft.tar.gz" | head -n1)" && \
-    echo "Extracted FilmCraft to ${filmcraft_dir}" && \
-    ls -la "${filmcraft_dir}"
+    mv "filmcraft-${FILMCRAFT_VERSION}-linux-${arch}" /tmp/filmcraft && \
+    /tmp/filmcraft/bin/filmcraft-cli --version
 
 # ===============================================================================
 # Final image
@@ -34,9 +33,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=downloader /tmp/filmcraft* /opt/filmcraft/
+COPY --from=downloader /tmp/filmcraft /opt/filmcraft
 
-ENV PATH="/opt/filmcraft:${PATH}"
+ENV PATH="/opt/filmcraft/bin:${PATH}"
 
-ENTRYPOINT ["/opt/filmcraft/filmcraft-cli"]
+ENTRYPOINT ["/opt/filmcraft/bin/filmcraft-cli"]
 CMD ["--help"]
