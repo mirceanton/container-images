@@ -24,4 +24,4 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=downloader /tmp/solidcraft-web-* /srv/solidcraft
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s \
-    CMD wget -q --spider http://127.0.0.1:8080/ || exit 1
+    CMD ["wget", "-q", "--spider", "http://127.0.0.1:8080/"]
