@@ -19,7 +19,7 @@ RUN apk add --no-cache curl unzip && \
 # ===============================================================================
 # Final image
 # ===============================================================================
-FROM nginxinc/nginx-unprivileged:1.29-alpine
+FROM nginxinc/nginx-unprivileged:1.31-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=downloader /tmp/deckcraft-web-* /srv/app
 EXPOSE 8080
