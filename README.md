@@ -14,7 +14,6 @@ Monorepo for various container images.
 | [steam-sunshine](https://ghcr.io/mirceanton/steam-sunshine) | NVIDIA + Steam + Sunshine couch gaming | [README](./containers/steam-sunshine/README.md) |
 | [taskfile](https://ghcr.io/mirceanton/taskfile)             | Task runner / build tool               | [README](./containers/taskfile/README.md)       |
 | [terragrunt](https://ghcr.io/mirceanton/terragrunt)         | Infrastructure as Code orchestration   | [README](./containers/terragrunt/README.md)     |
-| [zfs-exporter](https://ghcr.io/mirceanton/zfs-exporter)     | Prometheus exporter for ZFS metrics    | [README](./containers/zfs-exporter/README.md)   |
 
 ## Quick Start
 
