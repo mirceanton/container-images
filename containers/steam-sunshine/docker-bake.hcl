@@ -27,6 +27,11 @@ target "default" {
         "ghcr.io/mirceanton/steam-sunshine:${UBUNTU_VERSION}-sunshine-${SUNSHINE_VERSION}",
     ]
 
+    annotations = [
+        "index:org.opencontainers.image.visibility=public",
+        "index:org.opencontainers.image.source=https://github.com/mirceanton/container-images",
+    ]
+
     labels = {
         "org.opencontainers.image.vendor"   = "Mircea-Pavel Anton"
         "org.opencontainers.image.source"   = "https://github.com/mirceanton/container-images"

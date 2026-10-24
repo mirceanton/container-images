@@ -37,6 +37,11 @@ target "base" {
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}" : ""
     ]
 
+    annotations = [
+        "index:org.opencontainers.image.visibility=public",
+        "index:org.opencontainers.image.source=https://github.com/mirceanton/container-images",
+    ]
+
     labels = {
         "org.opencontainers.image.vendor" = "Mircea-Pavel Anton"
         "org.opencontainers.image.source" = "https://github.com/mirceanton/container-images"
@@ -91,6 +96,11 @@ target "terraform" {
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAFORM_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-terraform-${regex("^([0-9]+)", TERRAFORM_VERSION)[0]}" : ""
     ]
 
+    annotations = [
+        "index:org.opencontainers.image.visibility=public",
+        "index:org.opencontainers.image.source=https://github.com/mirceanton/container-images",
+    ]
+
     labels = {
         "org.opencontainers.image.vendor" = "Mircea-Pavel Anton"
         "org.opencontainers.image.source" = "https://github.com/mirceanton/container-images"
@@ -143,6 +153,11 @@ target "opentofu" {
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${OPENTOFU_VERSION}" : "",
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${regex("^([0-9]+\\.[0-9]+)", OPENTOFU_VERSION)[0]}" : "",
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", TERRAGRUNT_VERSION)) && can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", OPENTOFU_VERSION)) ? "ghcr.io/mirceanton/terragrunt:${regex("^([0-9]+)", TERRAGRUNT_VERSION)[0]}-opentofu-${regex("^([0-9]+)", OPENTOFU_VERSION)[0]}" : ""
+    ]
+
+    annotations = [
+        "index:org.opencontainers.image.visibility=public",
+        "index:org.opencontainers.image.source=https://github.com/mirceanton/container-images",
     ]
 
     labels = {

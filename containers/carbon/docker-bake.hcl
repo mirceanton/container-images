@@ -24,6 +24,11 @@ target "default" {
         can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", CARBON_VERSION)) ? "ghcr.io/mirceanton/carbon:${regex("^([0-9]+)", CARBON_VERSION)[0]}" : ""
     ]
 
+    annotations = [
+        "index:org.opencontainers.image.visibility=public",
+        "index:org.opencontainers.image.source=https://github.com/mirceanton/container-images",
+    ]
+
     labels = {
         "org.opencontainers.image.vendor"      = "Mircea-Pavel Anton"
         "org.opencontainers.image.source"      = "https://github.com/mirceanton/container-images"
