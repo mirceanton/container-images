@@ -4,3 +4,7 @@
 # =================================================================================================
 "aqua:rhysd/actionlint" = "latest"
 "aqua:hadolint/hadolint" = "latest"
+
+[settings]
+# Hold back freshly published tool releases (supply-chain protection).
+minimum_release_age = "3d"
