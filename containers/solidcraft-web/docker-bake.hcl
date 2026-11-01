@@ -2,7 +2,7 @@ DATE = formatdate("YYYY.MM.DD", timestamp())
 variable "GIT_SHA" {}
 variable "SOLIDCRAFT_VERSION" {
     # renovate: datasource=github-releases depName=tangency-labs/solidcraft
-    default = "0.25.1"
+    default = "0.26.0"
 }
 
 target "default" {
