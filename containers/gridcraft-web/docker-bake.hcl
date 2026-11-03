@@ -2,7 +2,7 @@ DATE = formatdate("YYYY.MM.DD", timestamp())
 variable "GIT_SHA" {}
 variable "VERSION" {
     # renovate: datasource=github-releases depName=storytold/gridcraft
-    default = "0.13.0"
+    default = "0.14.2"
 }
 
 target "default" {
