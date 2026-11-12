@@ -2,7 +2,7 @@ DATE = formatdate("YYYY.MM.DD", timestamp())
 variable "GIT_SHA" {}
 variable "VERSION" {
     # renovate: datasource=github-releases depName=storytold/deckcraft
-    default = "0.16.0"
+    default = "0.17.0"
 }
 
 target "default" {
