@@ -13,7 +13,7 @@ variable "MUTAGEN_VERSION" {
 
 variable "PYYAML_VERSION" {
     # renovate: datasource=pypi depName=pyyaml
-    default = "6.0.3"
+    default = "6.0.4"
 }
 
 variable "REQUESTS_VERSION" {
